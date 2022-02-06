@@ -16,3 +16,25 @@ export type UserContextState = {
   user: User;
   setUser: (user: User) => void;
 };
+
+export type Contact = {
+  firstName: string,
+  lastName: string,
+  dateOfBirth: string,
+  mobilePhone: string,
+  homePhone: string,
+  email: string,
+  pager: string
+}
+
+export type InitialData = {
+  [key: string]: {
+    firstName: string,
+    lastName: string,
+    dateOfBirth: string,
+    mobilePhone: string,
+    homePhone: string,
+    email: string,
+    pager: string
+  }
+}

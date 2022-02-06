@@ -6,7 +6,7 @@ const context: UserContextState = {
       email: '',
       password: ''
     },
-    setUser: (user: User) => [{}]
+    setUser: (user: User) => [{}],
 };
 
 const UserContext = createContext(context);
