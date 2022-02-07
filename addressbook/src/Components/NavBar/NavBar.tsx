@@ -17,9 +17,6 @@ function NavBar () {
         <h3>
           <Link to="contacts">Contacts</Link>
         </h3>
-        <h3>
-          <Link to="contacts/favorites">Favorites</Link>
-        </h3>
         {user.email ?
         <h3>
           <Link to="/" onClick={() => logout()}>Logout</Link>

@@ -1,4 +1,3 @@
-import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState, useMemo, useEffect } from 'react';
 import Dashboard from 'Components/Dashboard/Dashboard';
@@ -6,7 +5,7 @@ import NavBar from 'Components/NavBar/NavBar';
 import LoginForm from 'Components/LoginForm/LoginForm';
 import ContactList from 'Components/ContactList/ContactList';
 import ContactItem from 'Components/ContactItem/ContactItem';
-import FavoriteList from 'Components/FavoriteList/FavoriteList';
+import UpdatePage from 'Components/UpdatePage/UpdatePage';
 import mocks from '../src/Mocks/Mocks';
 import { UserContext } from 'Context/Context';
 import { User, LoginData } from '../src/Types/Types';
@@ -44,8 +43,8 @@ function App () {
             <Route path='/' element={<Dashboard />} />
             <Route path='/login' element={<LoginForm userLogin={userLogin} />} />
             <Route path='/contacts' element={<ContactList />} />
+            <Route path='/update/:id' element={<UpdatePage />} />
             <Route path='/contacts/:id' element={<ContactItem />} />
-            <Route path='/contacts/favorites' element={<FavoriteList />} />
           </Routes>
         </Router> 
       </UserContext.Provider> 

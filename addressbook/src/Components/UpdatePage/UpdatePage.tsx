@@ -1,13 +1,21 @@
-import './ContactList.css';
-import { useState, useEffect, useContext } from 'react';
+import './UpdatePage.css';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import fireDB from 'Firebase/Firebase';
-import { InitialData } from 'Types/Types';
+import { Contact } from 'Types/Types';
 import { toast } from 'react-toastify';
-import moment from 'moment';
-import { Link, useParams } from 'react-router-dom';
-import { UserContext } from '../../Context/Context';
 
-function ContactList () {
+const initialState = {
+  firstName: '',
+  lastName: '',
+  dateOfBirth: '',
+  mobilePhone: '',
+  homePhone: '',
+  email: '',
+  pager: '' 
+}
+
+function UpdatePage () {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -17,76 +25,53 @@ function ContactList () {
   const [email, setEmail] = useState('');
   const [pager, setPager] = useState('');
   const [radio, setRadio] = useState('');
-  const [contact, setContact] = useState<InitialData>({});
-  const { user } = useContext(UserContext);
+  const [edit, setEdit] = useState<Contact>(initialState);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fireDB.child('contacts').on('value', (snapshot) => {
-      if (snapshot.val() !== null) {
-        setContact({...snapshot.val()});
-      } else {
-        setContact({});
-      }
-    });
+    if (id) {
+      setEdit({...edit[id]})
+    } else {
+      setEdit({...initialState})
+    }
 
     return () => {
-      setContact({});
-    };
-  }, [id, email]);
+      setEdit({...initialState})
+    }
+  }, [id]);
 
-  function handleAddButton (e: React.SyntheticEvent) {
+  function handleSaveButton (e: React.SyntheticEvent) {
     e.preventDefault();
 
-    if (user.email == '') {
-      return alert('Please log in to be able to use the application.');
-    } else if (!(firstName && lastName && dateOfBirth && mobilePhone && homePhone && email && pager)) {
-      return alert('Please fill in all fields.');
+    if (!(firstName && lastName && dateOfBirth && mobilePhone && homePhone && email && pager)) {
+      return alert('Please edit all fields.');
     } else {
-      fireDB.child("contacts").push({firstName, lastName, dateOfBirth, mobilePhone, homePhone, email, pager}, (err) => {
+      fireDB.child('contacts/' + id).set({
+        firstName: firstName,
+        lastName: lastName,
+        dateOfBirth: dateOfBirth,
+        mobilePhone: mobilePhone,
+        homePhone: homePhone,
+        email: email,
+        pager: pager,
+      }, (err) => {
         if (err) {
           toast.error(err);
         } else {
-          toast.success('Contact added!');
+          toast.success('Contact edited!');
         }
       });
-      setFirstName('');
-      setLastName('');
-      setDateOfBirth('');
-      setMobilePhone('');
-      setHomePhone('');
-      setEmail('');
-      setPager('');
-    }
-  }
-
-  function handleDeleteButton (id: string) {
-    fireDB.child(`/contacts/${id}`).remove((err) => {
-      if (err) {
-        toast.error(err);
-      } else {
-        toast.success('Contact deleted!');
-      }
-    });
-  }
-
-  function sortContacts (orderString: string) {
-
-    const sortedContacts = {};
-
-    fireDB.child('contacts').orderByChild(orderString).on('child_added', snapshot => {
-      const key = snapshot.key;
-      const value = snapshot.val();
-      sortedContacts[key] = value;   
-    });
-    setContact({...sortedContacts});
+    } 
+    setEdit({firstName, lastName, dateOfBirth, mobilePhone, homePhone, email, pager});
+    navigate('/contacts');
   }
 
   return (
     <div className="contact-list-container">
       <div className="contact-form">
         <form className="contact-input-form">
-          <h2 className="contact-form-title">Create contact</h2> 
+          <h2 className="contact-form-title">Update contact</h2> 
           <div className="input-order">
             <label className="add-label">First name:</label>
             <input 
@@ -94,7 +79,7 @@ function ContactList () {
               type="text" 
               placeholder="Enter first name..." 
               maxLength={20} 
-              value={firstName} 
+              value={firstName || ""} 
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value)}>
             </input>     
           </div>
@@ -105,7 +90,7 @@ function ContactList () {
               type="text" 
               placeholder="Enter last name..." 
               maxLength={30} 
-              value={lastName} 
+              value={lastName || ""} 
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)}>
             </input>
           </div>
@@ -116,7 +101,8 @@ function ContactList () {
               type="datetime-local" 
               max={new Date().toISOString().slice(0, -8)} 
               placeholder="Enter date of birth..." 
-              value={dateOfBirth} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateOfBirth(e.target.value)}>
+              value={dateOfBirth || ""} 
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateOfBirth(e.target.value)}>
             </input>     
           </div>
           <div className="input-order">
@@ -194,50 +180,13 @@ function ContactList () {
             defaultValue={pager} 
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPager(e.target.value)}>
           </input>}   
-
           <div className="add-button-container">
-            <button className="add-contact-button" type="submit" onClick={handleAddButton}>Create</button>
+            <button className="add-contact-button" type="submit" onClick={handleSaveButton}>Update</button>
           </div>
         </form>
-      </div>
-
-      <div className="contact-table">
-        <table className="table-container">
-          <thead className="table-header">
-            <tr className="table-row">
-              <th className="table-title"><button className="title-button" type="button" onClick={() => sortContacts('firstName')}>First name</button></th>
-              <th className="table-title"><button className="title-button" type="button" onClick={() => sortContacts('lastName')}>Last name</button></th>
-              <th className="table-title"><button className="title-button" type="button" onClick={() => sortContacts('dateOfBirth')}>Date of birth</button></th>
-              <th className="table-title"><button className="title-button" type="button" onClick={() => sortContacts('mobilePhone')}>Mobile phone</button></th>
-              <th className="table-title"><button className="title-button" type="button" onClick={() => sortContacts('homePhone')}>Home phone</button></th>
-              <th className="table-title"><button className="title-button" type="button" onClick={() => sortContacts('emil')}>Email</button></th>
-              <th className="table-title"><button className="title-button" type="button" onClick={() => sortContacts('pager')}>Pager</button></th>
-              <th className="table-title">Functions</th>
-            </tr>
-          </thead>
-          <tbody className="table-body">
-          {user.email && contact != null && Object.entries(contact).map((item, index) => (
-            <tr className="table-row" key={index}>
-              <td className="table-data">{item[1].firstName}</td>
-              <td className="table-data">{item[1].lastName}</td>
-              <td className="table-data">{moment(item[1].dateOfBirth).format('MMMM Do, YYYY')}</td>
-              <td className="table-data">{item[1].mobilePhone}</td>
-              <td className="table-data">{item[1].homePhone}</td>
-              <td className="table-data">{item[1].email}</td>
-              <td className="table-data">{item[1].pager}</td>
-              <td>
-                <Link to={`/contacts/${item[0]}`}>
-                  <button className="table-button">View</button>
-                </Link > 
-                <button className="table-button" onClick={() => handleDeleteButton(item[0])}>Delete</button>
-              </td>
-            </tr>   
-          ))}
-          </tbody>
-        </table>
       </div>
     </div>   
   );
 }
 
-export default ContactList;
+export default UpdatePage;

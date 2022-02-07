@@ -46,6 +46,9 @@ function ContactItem () {
           <Link to={'/contacts'}>
             <button className="contact-button">Back</button>
           </Link>
+          <Link to={`/update/${id}`}>
+            <button className="table-button">Update</button>
+          </Link>
         </div>
       </div>
     }
