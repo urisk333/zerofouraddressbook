@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import moment from 'moment';
 import { Link, useParams } from 'react-router-dom';
 import { UserContext } from '../../Context/Context';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 function ContactList () {
 
@@ -205,13 +207,13 @@ function ContactList () {
         <table className="table-container">
           <thead className="table-header">
             <tr className="table-row">
-              <th className="table-title"><button className="title-button" type="button" onClick={() => sortContacts('firstName')}>First name</button></th>
-              <th className="table-title"><button className="title-button" type="button" onClick={() => sortContacts('lastName')}>Last name</button></th>
-              <th className="table-title"><button className="title-button" type="button" onClick={() => sortContacts('dateOfBirth')}>Date of birth</button></th>
-              <th className="table-title"><button className="title-button" type="button" onClick={() => sortContacts('mobilePhone')}>Mobile phone</button></th>
-              <th className="table-title"><button className="title-button" type="button" onClick={() => sortContacts('homePhone')}>Home phone</button></th>
-              <th className="table-title"><button className="title-button" type="button" onClick={() => sortContacts('emil')}>Email</button></th>
-              <th className="table-title"><button className="title-button" type="button" onClick={() => sortContacts('pager')}>Pager</button></th>
+              <th className="table-title" onClick={() => sortContacts('firstName')}>First name</th>
+              <th className="table-title" onClick={() => sortContacts('lastName')}>Last name</th>
+              <th className="table-title" onClick={() => sortContacts('dateOfBirth')}>Date of birth</th>
+              <th className="table-title" onClick={() => sortContacts('mobilePhone')}>Mobile phone</th>
+              <th className="table-title" onClick={() => sortContacts('homePhone')}>Home phone</th>
+              <th className="table-title" onClick={() => sortContacts('emil')}>Email</th>
+              <th className="table-title" onClick={() => sortContacts('pager')}>Pager</th>
               <th className="table-title">Functions</th>
             </tr>
           </thead>
@@ -227,9 +229,13 @@ function ContactList () {
               <td className="table-data">{item[1].pager}</td>
               <td>
                 <Link to={`/contacts/${item[0]}`}>
-                  <button className="table-button">View</button>
+                  <button className="table-button">
+                    <FontAwesomeIcon className="fa fa-eye icon" icon={faEye} />
+                  </button>
                 </Link > 
-                <button className="table-button" onClick={() => handleDeleteButton(item[0])}>Delete</button>
+                <button className="table-button" onClick={() => handleDeleteButton(item[0])}>
+                  <FontAwesomeIcon className="fa-times icon" icon={faTimes} />
+                </button>
               </td>
             </tr>   
           ))}

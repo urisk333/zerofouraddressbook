@@ -1,8 +1,9 @@
 import './ContactItem.css';
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import fireDB from 'Firebase/Firebase';
 import { Contact } from '../../Types/Types';
+import { toast } from 'react-toastify';
 import moment from 'moment';
 
 const initialState = {
@@ -19,6 +20,7 @@ function ContactItem () {
 
   const [contact, setContact] = useState<Contact>(initialState);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fireDB.child(`contacts/${id}`).get().then((snapshot) => {
@@ -29,6 +31,17 @@ function ContactItem () {
       }
     })
   }, [id]);
+
+  function handleDeleteButton (id: string) {
+    fireDB.child(`/contacts/${id}`).remove((err) => {
+      if (err) {
+        toast.error(err);
+      } else {
+        toast.success('Contact deleted!');
+      }
+    });
+    navigate('/contacts');
+  }
 
   return (
     <div className="contact-item-container">
@@ -49,6 +62,7 @@ function ContactItem () {
           <Link to={`/update/${id}`}>
             <button className="table-button">Update</button>
           </Link>
+          <button className="table-button" onClick={() => handleDeleteButton(id)}>Delete</button>
         </div>
       </div>
     }
