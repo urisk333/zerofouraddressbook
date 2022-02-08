@@ -1,6 +1,6 @@
 # zerofouraddressbook
 
-Zerofouraddressbook is a React web application which uses Firebase Realtime Database, and by using the application, you are able to login and create, read, update and delete the contacts.
+ZeroFouraddressbook is a React web application which uses Firebase Realtime Database, and by using the application, you are able to login and create, read, update and delete the contacts.
 
 # Getting started
 
@@ -78,6 +78,10 @@ Password: Admin123$
 - [ReactJS](https://reactjs.org)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Firebase Realtime Database](https://console.firebase.google.com/)
+
+# Deployment
+
+[ZeroFouraddressbook](https://zerofouraddressbook-7fennr4uq-urisk333.vercel.app/) on [Vercel](https://vercel.com/)
 
 # Author
 
