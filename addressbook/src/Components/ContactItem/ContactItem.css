@@ -1,0 +1,49 @@
+.contact-item-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 440px;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.contact-title {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.contact-label {
+  font-family: "Nunito", sans-serif;
+  font-weight: bolder;
+  color: rgb(33, 150, 243);
+}
+
+.contact-info {
+  font-family: "Nunito", sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.contact-view-button {
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+  text-align: center;
+}
+
+.contact-button {
+  height: 30px;
+  width: 100px;
+  background-color: rgb(33, 150, 243);
+  border-radius: 15px;
+  margin: 0 10px 0 10px;
+  color: white;
+  box-shadow: 2px 2px 4px gray;
+  font-family: "Nunito", sans-serif;
+  font-weight: bolder;
+  letter-spacing: 1px;
+}
+
+.contact-button:hover {
+  color: black;
+}

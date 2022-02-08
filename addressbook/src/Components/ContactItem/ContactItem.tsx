@@ -48,21 +48,26 @@ function ContactItem () {
     {contact != null &&
       <div className="contact-item">
         <h2 className="contact-title">Contact view</h2>
-        <div className="contact-info">{contact.firstName}</div>
-        <div className="contact-info">{contact.lastName}</div>
+        <label className="contact-label">Name</label>
+        <div className="contact-info">{contact.firstName} {contact.lastName}</div>   
+        <label className="contact-label">Date of birth</label>
         <div className="contact-info">{moment(contact.dateOfBirth).format('MMMM Do, YYYY')}</div>
+        <label className="contact-label">Mobile phone</label>
         <div className="contact-info">{contact.mobilePhone}</div>
+        <label className="contact-label">Home phone</label>
         <div className="contact-info">{contact.homePhone}</div>
-        <div className="contact-info">{contact.email}</div>    
+        <label className="contact-label">Email</label>
+        <div className="contact-info">{contact.email}</div>
+        <label className="contact-label">Pager</label>
         <div className="contact-info">{contact.pager}</div>
         <div className="contact-view-button">
           <Link to={'/contacts'}>
             <button className="contact-button">Back</button>
           </Link>
           <Link to={`/update/${id}`}>
-            <button className="table-button">Update</button>
+            <button className="contact-button">Update</button>
           </Link>
-          <button className="table-button" onClick={() => handleDeleteButton(id)}>Delete</button>
+          <button className="contact-button" onClick={() => handleDeleteButton(id)}>Delete</button>
         </div>
       </div>
     }
