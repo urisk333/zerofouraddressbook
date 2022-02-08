@@ -1,6 +1,6 @@
 import './UpdatePage.css';
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import fireDB from 'Firebase/Firebase';
 import { Contact } from 'Types/Types';
 import { toast } from 'react-toastify';
@@ -68,14 +68,14 @@ function UpdatePage () {
   }
 
   return (
-    <div className="contact-list-container">
-      <div className="contact-form">
-        <form className="contact-input-form">
-          <h2 className="contact-form-title">Update contact</h2> 
+    <div className="update-list-container">
+      <div className="update-form">
+        <form className="update-input-form">
+          <h2 className="update-form-title">Update contact</h2> 
           <div className="input-order">
             <label className="add-label">First name:</label>
             <input 
-              className="add-input-information" 
+              className="update-input-information" 
               type="text" 
               placeholder="Enter first name..." 
               maxLength={20} 
@@ -86,7 +86,7 @@ function UpdatePage () {
           <div className="input-order">
             <label className="add-label">Last name:</label>
             <input 
-              className="add-input-information" 
+              className="update-input-information" 
               type="text" 
               placeholder="Enter last name..." 
               maxLength={30} 
@@ -97,7 +97,7 @@ function UpdatePage () {
           <div className="input-order">
             <label className="add-label">Date of birth:</label>
             <input 
-              className="add-input-information" 
+              className="update-input-information" 
               type="datetime-local" 
               max={new Date().toISOString().slice(0, -8)} 
               placeholder="Enter date of birth..." 
@@ -105,83 +105,90 @@ function UpdatePage () {
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDateOfBirth(e.target.value)}>
             </input>     
           </div>
-          <div className="input-order">
-            <label className="add-label">Type of contact:</label>
-            <input 
-              type="radio" 
-              id="contactChoice1" 
-              name="contact" 
-              value="mobile" 
-              checked={radio === 'mobile'} 
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRadio(e.target.value)}>
-            </input>
-            <label htmlFor="contactChoice1">Mobile</label>
-            <input 
-              type="radio" 
-              id="contactChoice2" 
-              name="contact" 
-              value="phone" 
-              checked={radio === 'phone'} 
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRadio(e.target.value)}>
-            </input>
-            <label htmlFor="contactChoice2">Home</label>
-            <input 
-              type="radio" 
-              id="contactChoice3" 
-              name="contact" 
-              value="email" 
-              checked={radio === 'email'} 
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRadio(e.target.value)}>
-            </input>
-            <label htmlFor="contactChoice3">Email</label>
-            <input 
-              type="radio" 
-              id="contactChoice4" 
-              name="contact" 
-              value="pager" 
-              checked={radio === 'pager'} 
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRadio(e.target.value)}>
-            </input>
-            <label htmlFor="contactChoice3">Pager</label>
-          </div>
+          <div className="input-order-update">
+            <div className="input-order-update-title">
+              <label className="add-label">Type of contact:</label>
+            </div>
+            <div className="input-update-radio">
+              <input 
+                type="radio" 
+                id="contactChoice1" 
+                name="contact" 
+                value="mobile" 
+                checked={radio === 'mobile'} 
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRadio(e.target.value)}>
+              </input>
+              <label className="radio-label" htmlFor="contactChoice1">Mobile</label>
+              <input 
+                type="radio" 
+                id="contactChoice2" 
+                name="contact" 
+                value="phone" 
+                checked={radio === 'phone'} 
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRadio(e.target.value)}>
+              </input>
+              <label className="radio-label" htmlFor="contactChoice2">Home</label>
+              <input 
+                type="radio" 
+                id="contactChoice3" 
+                name="contact" 
+                value="email" 
+                checked={radio === 'email'} 
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRadio(e.target.value)}>
+              </input>
+              <label className="radio-label" htmlFor="contactChoice3">Email</label>
+              <input 
+                type="radio" 
+                id="contactChoice4" 
+                name="contact" 
+                value="pager" 
+                checked={radio === 'pager'} 
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRadio(e.target.value)}>
+              </input>
+              <label className="radio-label" htmlFor="contactChoice4">Pager</label>
+            </div>
 
-          {radio === 'mobile' &&
+            {radio === 'mobile' &&
+              <input 
+                className="update-input-information" 
+                type="number" 
+                placeholder="Enter mobile phone..." 
+                defaultValue={mobilePhone} 
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMobilePhone(e.target.value)}>
+              </input>}
+
+            {radio === 'phone' && 
             <input 
-              className="add-input-information" 
+              className="update-input-information" 
               type="number" 
-              placeholder="Enter mobile phone..." 
-              defaultValue={mobilePhone} 
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMobilePhone(e.target.value)}>
+              placeholder="Enter home phone..." 
+              defaultValue={homePhone} 
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHomePhone(e.target.value)}>
             </input>}
 
-          {radio === 'phone' && 
-          <input 
-            className="add-input-information" 
-            type="number" 
-            placeholder="Enter home phone..." 
-            defaultValue={homePhone} 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHomePhone(e.target.value)}>
-          </input>}
+            {radio === 'email' && 
+            <input 
+              className="update-input-information" 
+              type="text" 
+              placeholder="Enter email..." 
+              defaultValue={email} 
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}>
+            </input>}
 
-          {radio === 'email' && 
-          <input 
-            className="add-input-information" 
-            type="text" 
-            placeholder="Enter email..." 
-            defaultValue={email} 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}>
-          </input>}
-
-          {radio === 'pager' &&
-          <input 
-            className="add-input-information" 
-            type="number" 
-            placeholder="Enter pager..." 
-            defaultValue={pager} 
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPager(e.target.value)}>
-          </input>}   
-          <div className="add-button-container">
-            <button className="add-contact-button" type="submit" onClick={handleSaveButton}>Update</button>
+            {radio === 'pager' &&
+            <input 
+              className="update-input-information" 
+              type="number" 
+              placeholder="Enter pager..." 
+              defaultValue={pager} 
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPager(e.target.value)}>
+            </input>}  
+          </div> 
+          <div className="update-button-container">
+            <button className="update-contact-button" type="submit" onClick={handleSaveButton}>Update</button>
+            <Link to={'/contacts'}>
+              <button className="update-contact-button">Cancel</button>
+            </Link>
           </div>
         </form>
       </div>

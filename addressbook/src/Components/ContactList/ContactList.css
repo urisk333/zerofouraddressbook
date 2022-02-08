@@ -1,0 +1,139 @@
+.contact-list-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 92%;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 20px 20px 0 0;
+  background-color: white;
+}
+
+.contact-form h2 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: rgb(33, 150, 243);
+  border-radius: 20px 20px 0 0;
+}
+
+.contact-input-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-bottom: 1rem;
+  background-color: rgb(33, 150, 243);
+  font-weight: bolder;
+}
+
+.input-order {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-label {
+  padding-right: 5px;
+  padding-left: 2px;
+}
+
+.contact-table h2 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.add-input-information {
+  height: 30px;
+  padding-left: 10px;
+  border: 2px solid black;
+  border-radius: 6px;
+  font-family: "Nunito", sans-serif;
+  font-weight: bolder;
+  color: rgb(33, 150, 243);
+}
+
+.add-input-information:focus {
+  outline: none !important;
+  box-shadow: 0 0 10px white;
+}
+
+.add-contact-button {
+  height: 30px;
+  width: 100px;
+  background-color: white;
+  border-radius: 15px;
+  margin-top: 5px;
+  color: black;
+  box-shadow: 2px 2px 4px gray;
+  font-family: "Nunito", sans-serif;
+  font-weight: bolder;
+  letter-spacing: 1px;
+}
+
+.add-contact-button:hover {
+  color: rgb(33, 150, 243);
+}
+
+.add-button-container {
+  display: flex;
+  align-items: center;
+}
+
+.table-container {
+  width: 100%;
+  border-spacing: 0;
+}
+
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  width: 12.5%;
+  border: 2px solid black;
+  height: 40px;
+}
+
+td {
+  text-align: left;
+  padding: 5px;
+  font-weight: bolder;
+  word-break: break-all;
+}
+
+th {
+  background-color: rgb(33, 150, 243);
+  color: white;
+}
+
+th:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.table-button-order {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.table-button {
+  background-color: white;
+  padding-top: 3px;
+}
+
+.eye {
+  margin-right: 10px;
+}
+
+.times {
+  margin-left: 10px;
+}
+
+td .table-button .icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: black;
+  border: 2px solid black;
+}

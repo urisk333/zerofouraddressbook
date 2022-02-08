@@ -1,0 +1,73 @@
+.update-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 440px;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.update-form h2 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.update-input-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 1.5rem;
+  font-weight: bolder;
+}
+
+.input-order {
+  padding-bottom: 1rem;
+}
+
+.input-order-update {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-order-update-title,
+.input-update-radio {
+  padding-bottom: 5px;
+}
+
+.update-input-information {
+  height: 30px;
+  width: 80%;
+  margin: auto;
+  padding-left: 10px;
+  border: 2px solid black;
+  border-radius: 6px;
+  font-family: "Nunito", sans-serif;
+  font-weight: bolder;
+  color: rgb(33, 150, 243);
+}
+
+.update-input-information:focus {
+  outline: none !important;
+  border: 2px solid rgb(33, 150, 243);
+  box-shadow: 0 0 10px gray;
+}
+
+.update-contact-button {
+  height: 30px;
+  width: 100px;
+  background-color: rgb(33, 150, 243);
+  border-radius: 15px;
+  color: white;
+  box-shadow: 2px 2px 4px gray;
+  font-family: "Nunito", sans-serif;
+  font-weight: bolder;
+  letter-spacing: 1px;
+  margin: 24px 10px 0 10px;
+}
+
+.update-contact-button:hover {
+  color: black;
+}
