@@ -42,7 +42,7 @@ function ContactList () {
 
     if (user.email == '') {
       return alert('Please log in to be able to use the application.');
-    } else if (!(firstName && lastName && dateOfBirth && mobilePhone && homePhone && email && pager)) {
+    } else if (!(firstName && lastName && dateOfBirth && (mobilePhone || homePhone || email || pager))) {
       return alert('Please fill in all fields.');
     } else {
       fireDB.child("contacts").push({firstName, lastName, dateOfBirth, mobilePhone, homePhone, email, pager}, (err) => {
